@@ -2,7 +2,7 @@ module.exports=function(grunt){
 	grunt.initConfig({
 		uglify:{
 			dist:{
-				src:"source/js/script.js",
+				src:"source/js/~script.js",
 				dest:"release/js/script-min.js"
 			}
 		},
@@ -13,7 +13,7 @@ module.exports=function(grunt){
 				'source/js/mainscript.js',
 				'source/js/addscript.js'
 				],
-			dest:'source/js/script.js'
+			dest:'source/js/~script.js'
 			}
 		},
 
