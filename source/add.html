@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>database</title>
+<link rel="stylesheet" type="text/css" href="css/min.css">
+<script type="text/javascript" src="js/script-min.js"></script>
+</head>
+<body onload="addLoad()">
+	<a href="./index.html">検索</a><br>
+	*name:<input type="text" id="name"><br>
+	評価:<select id="evaluation"></select><br>
+	*家賃:<input type="text" id="cost">万円<br>
+	*敷金:<input type="text" id="deposit">万円<br>
+	*礼金:<input type="text" id="reward">万円<br>
+	*都道府県:<select id="prefecture"></select><span id="prefectureButton">+</span><input type="text" id="prefectureInput"></input><br>
+	*市町村:<select id="city"></select><span id="cityButton">+</span><input type="text" id="cityInput"></input><br>
+	区:<select id="ward"></select><span id="wardButton">+</span><input type="text" id="wardInput"></input><br>
+	*住所:<input type="text" id="address"><br>
+	*住道まで:<input type="text" id="toSumi">分<br>
+	*肥後橋まで:<input type="text" id="toHigo">分<br>
+	二人入居可:<input type="checkbox" id="pair"><br>
+	バストイレ別:<input type="checkbox" id="bath_wc"><br>
+	バルコニー付き:<input type="checkbox" id="balcony"><br>
+	二口コンロ:<input type="checkbox" id="two_stove"><br>
+	駐輪場付き:<input type="checkbox" id="bicycles"><br>
+	メリット:<input type="text" id="merit"><br>
+	デメリット:<input type="text" id="demerit"><br>
+	その他:<input type="text" id="other"><br>
+	*URL:<input type="text" id="url"><br>
+	*マークがついているのは必須項目<br>
+	県や市、区の候補にないものは+を押すと入力ボックスが出るのでそこで入力する<br>
+	<input type="button" onClick="addfromForm();" value="追加"></input>
+</body>
+</html>

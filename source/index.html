@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>database</title>
+<link rel="stylesheet" type="text/css" href="css/min.css">
+<script type="text/javascript" src="js/script-min.js"></script>
+</head>
+<body onLoad="load()">
+	<div id="layout">
+		<div id="list">
+			<H2>検索条件</H2>
+			<div class="category">カテゴリ</div>
+			評価<select id="evaluation"></select><br>
+			家賃<select id="lowerCost"></select>～<select id="upperCost"></select><br>
+			都道府県<select id="prefecture"></select><br>
+			市町村<select id="city"></select><br>
+			住道まで<select id="toSumi"></select><br>
+			肥後橋まで<select id="toHigo"></select><br>
+			<input type="checkbox" id="pair">二人入居可<br>
+			<input type="checkbox" id="bath">バストイレ別<br>
+			<input type="checkbox" id="balcony">バルコニー付き<br>
+			<input type="checkbox" id="stove">二口コンロ<br>
+			<input type="checkbox" id="bicycles">駐輪場付き<br>
+			<button type="button" name="search" onClick="search()">検索</button>
+		</div>
+		<div id="main">
+			<H1>database</H1>
+			<button type="button" name="b1" onClick="call()">全件表示</button>
+			<a href="add.html">追加</a>
+			<div id="response"></div>
+		</div>
+		
+	</div>
+</body>
+</html>

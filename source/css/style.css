@@ -1,0 +1,76 @@
+/* -------------------- index.html -------------------- */
+
+body{
+	font-family:"メイリオ";
+}
+
+#main {
+	width:80%;
+	float:right;
+}
+
+#list {
+	float:left;
+	width:20%;
+}
+
+#layout {
+	width:100%;
+}
+
+.table {
+	width:400px;
+	border-top:3px solid;
+	border-bottom:3px solid;
+	border-color:blue;
+}
+
+.name {
+	font-size:18px;
+}
+
+.evaluation{
+	color:#F7FE2E;
+}
+
+.cost {
+	width:100px;
+	height:100px;
+	color: rgb(0,174,174);
+	font-size:20px;
+	float:left;
+}
+
+.deposit {
+	width:152px;
+	height:15px;
+	float:left;
+	padding-top:35px;
+}
+
+.reward {
+	width:152px;
+	height:50px;
+	float:left;
+}
+
+.toSumi {
+	clear:both;
+}
+
+.category {
+}
+
+/* -------------------- add.html -------------------- */
+
+#prefectureInput{
+	visibility:hidden;
+}
+
+#cityInput{
+	visibility:hidden;
+}
+
+#wardInput{
+	visibility:hidden;
+}
