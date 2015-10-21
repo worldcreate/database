@@ -39,6 +39,10 @@ var value=["@@","@@",new Evaluation(),"@@ 万円","敷金 @@ 万円","礼金 @@ 
 		"@@","@@","@@","住道まで @@ 分","肥後橋まで @@ 分",new RadioButton("二人入居可"),new RadioButton("バストイレ別"),
 		new RadioButton("バルコニー付き"),new RadioButton("二口コンロ"),new RadioButton("駐輪場付き"),"メリット @@","デメリット @@","その他 @@",new URL()];
 
+var sort=["家賃","評価値"];
+
+var type=["昇順","降順"];
+
 //--------------------------------------------------------
 
 function String_at() {
@@ -113,6 +117,15 @@ function load(){
 		text+="★";
 		evaBox.innerHTML+="<option value="+i+">"+text+"</option>";
 	}
+
+	var sortSelect=document.getElementById("sortType");
+	sortSelect.innerHTML="<option value=''>----</option>";
+	sort.forEach(function(e,i,a){
+		type.forEach(function(e2,i2,a2){
+			sortSelect.innerHTML+="<option value='"+i+","+i2+"'>"+e+e2+"</option>";
+		});
+	});
+
 }
 
 function call(){
