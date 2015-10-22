@@ -112,12 +112,12 @@ function addfromForm(){
 				addLoad();
 			}
 		},data);
-	}
+	};
 
 	var Data=new function (){
 		this.data={"table":"rent"};
 		this.count=0;
-	}
+	};
 
 	for(var i=0;i<stringId.length;i++){
 		var ele=document.getElementById(stringId[i]);
