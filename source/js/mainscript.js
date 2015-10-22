@@ -41,7 +41,11 @@ var value=["@@","@@",new Evaluation(),"@@ 万円","敷金 @@ 万円","礼金 @@ 
 
 var sort=["家賃","評価値"];
 
+var sortName=["cost","evaluation"];
+
 var type=["昇順","降順"];
+
+var typeName=["asc","desc"];
 
 //--------------------------------------------------------
 
@@ -150,6 +154,11 @@ function search(){
 	var isBalcony=document.getElementById("balcony").checked;
 	var isStove=document.getElementById("stove").checked;
 	var isBicycles=document.getElementById("bicycles").checked;
+	var sortValue=getSelectBoxValue("sortType").split(",");
+	if(sortValue!=""){
+		var sortname=sortName[sortValue[0]];
+		var sorttype=typeName[sortValue[1]];
+	}
 	var data={
 				evaluation:evaluation,
 				upper:upper,
@@ -163,6 +172,8 @@ function search(){
 				balcony:isBalcony,
 				stove:isStove,
 				bicycles:isBicycles
+				sortName:sortname,
+				sortType:sortType
 			};
 	xhrSend("cgi/data.php",function(){
 		if(this.readyState===4 && this.status===200){
