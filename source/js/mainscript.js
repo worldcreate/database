@@ -174,21 +174,21 @@ function search(){
 		sorttype=typeName[sortValue[1]];
 	}
 	var data={
-				evaluation:evaluation,
-				upper:upper,
-				lower:lower,
-				prefecture:prefecture,
-				city:city,
-				sumi:toSumi,
-				higo:toHigo,
-				pair:isPair,
-				bath:isBath,
-				balcony:isBalcony,
-				stove:isStove,
-				bicycles:isBicycles,
-				sortName:sortname,
-				sortType:sorttype
-			};
+		evaluation:evaluation,
+		upper:upper,
+		lower:lower,
+		prefecture:prefecture,
+		city:city,
+		sumi:toSumi,
+		higo:toHigo,
+		pair:isPair,
+		bath:isBath,
+		balcony:isBalcony,
+		stove:isStove,
+		bicycles:isBicycles,
+		sortName:sortname,
+		sortType:sorttype
+	};
 	xhrSend("cgi/data.php",function(){
 		if(this.readyState===4 && this.status===200){
 			var text=this.responseText.split("\n");
