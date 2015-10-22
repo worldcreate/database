@@ -133,12 +133,24 @@ function load(){
 }
 
 function call(){
-	xhrOpen("cgi/data.php",function(){
+	var sortValue=getSelectBoxValue("sortType").split(",");
+	var sortname="";
+	var sorttype="";
+	if(sortValue!=""){
+		sortname=sortName[sortValue[0]];
+		sorttype=typeName[sortValue[1]];
+	}
+	var data={
+		sortName:sortname,
+		sortType:sorttype
+	};
+
+	xhrSend("cgi/data.php",function(){
 		if(this.readyState===4 && this.status===200){
 			var text=this.responseText.split("\n");
 			setResponse(text);
 		}
-	});
+	},data);
 }
 
 function search(){
