@@ -155,9 +155,11 @@ function search(){
 	var isStove=document.getElementById("stove").checked;
 	var isBicycles=document.getElementById("bicycles").checked;
 	var sortValue=getSelectBoxValue("sortType").split(",");
+	var sortname="";
+	var sorttype="";
 	if(sortValue!=""){
-		var sortname=sortName[sortValue[0]];
-		var sorttype=typeName[sortValue[1]];
+		sortname=sortName[sortValue[0]];
+		sorttype=typeName[sortValue[1]];
 	}
 	var data={
 				evaluation:evaluation,
@@ -173,7 +175,7 @@ function search(){
 				stove:isStove,
 				bicycles:isBicycles,
 				sortName:sortname,
-				sortType:sortType
+				sortType:sorttype
 			};
 	xhrSend("cgi/data.php",function(){
 		if(this.readyState===4 && this.status===200){
