@@ -171,7 +171,7 @@ function search(){
 				bath:isBath,
 				balcony:isBalcony,
 				stove:isStove,
-				bicycles:isBicycles
+				bicycles:isBicycles,
 				sortName:sortname,
 				sortType:sortType
 			};
