@@ -29,6 +29,84 @@ URL.prototype.at=function(arg){
 	return "<a href=\'"+arg+"\'>"+arg+"</a>";
 };
 
+var Data=function(){
+	this.evaluation="";
+	this.lower="";
+	this.upper="";
+	this.toSumi="";
+	this.toHigo="";
+	this.prefecture="";
+	this.city="";
+	this.isPair="";
+	this.isBath="";
+	this.isBalcony="";
+	this.isStove="";
+	this.isBicycles="";
+	this.sortValue="";
+	this.sortname="";
+	this.sorttype="";
+	this.data="";
+	this.sortName=["cost","evaluation"];
+	this.typeName=["asc","desc"];
+};
+
+Data.prototype.getSelectBoxValue=function(id){
+	var box=document.getElementById(id);
+	return box.options[box.selectedIndex].value;
+}
+
+Data.prototype.loadData=function(){
+	this.evaluation=this.getSelectBoxValue("evaluation");
+	this.lower=this.getSelectBoxValue("lowerCost");
+	this.upper=this.getSelectBoxValue("upperCost");
+	this.toSumi=this.getSelectBoxValue("toSumi");
+	this.toHigo=this.getSelectBoxValue("toHigo");
+	this.prefecture=this.getSelectBoxValue("prefecture");
+	this.city=this.getSelectBoxValue("city");
+	this.isPair=document.getElementById("pair").checked;
+	this.isBath=document.getElementById("bath").checked;
+	this.isBalcony=document.getElementById("balcony").checked;
+	this.isStove=document.getElementById("stove").checked;
+	this.isBicycles=document.getElementById("bicycles").checked;
+	this.sortValue=this.getSelectBoxValue("sortType").split(",");
+	if(this.sortValue!=""){
+		this.sortname=this.sortName[this.sortValue[0]];
+		this.sorttype=this.typeName[this.sortValue[1]];
+	}
+	this.data={
+		evaluation:this.evaluation,
+		upper:this.upper,
+		lower:this.lower,
+		prefecture:this.prefecture,
+		city:this.city,
+		sumi:this.toSumi,
+		higo:this.toHigo,
+		pair:this.isPair,
+		bath:this.isBath,
+		balcony:this.isBalcony,
+		stove:this.isStove,
+		bicycles:this.isBicycles,
+		sortName:this.sortname,
+		sortType:this.sorttype
+	};
+};
+
+Data.prototype.loadSort=function(){
+	this.sortValue=this.getSelectBoxValue("sortType").split(",");
+	if(this.sortValue!=""){
+		this.sortname=this.sortName[this.sortValue[0]];
+		this.sorttype=this.typeName[this.sortValue[1]];
+	}
+	this.data={
+		sortName:this.sortname,
+		sortType:this.sorttype
+	};
+}
+
+Data.prototype.getData=function(){
+	return this.data;
+}
+
 //--------------------------------------------------------
 
 var tag=["id","name","evaluation","cost","deposit","reward","prefecture",
@@ -41,12 +119,7 @@ var value=["@@","@@",new Evaluation(),"@@ 万円","敷金 @@ 万円","礼金 @@ 
 
 var sort=["家賃","評価値"];
 
-var sortName=["cost","evaluation"];
-
 var type=["昇順","降順"];
-
-var typeName=["asc","desc"];
-
 //--------------------------------------------------------
 
 function String_at() {
@@ -133,73 +206,27 @@ function load(){
 }
 
 function call(){
-	var sortValue=getSelectBoxValue("sortType").split(",");
-	var sortname="";
-	var sorttype="";
-	if(sortValue!=""){
-		sortname=sortName[sortValue[0]];
-		sorttype=typeName[sortValue[1]];
-	}
-	var data={
-		sortName:sortname,
-		sortType:sorttype
-	};
+	var d=new Data();
+	d.loadSort();
 
 	xhrSend("cgi/data.php",function(){
 		if(this.readyState===4 && this.status===200){
 			var text=this.responseText.split("\n");
 			setResponse(text);
 		}
-	},data);
+	},d.getData());
 }
 
 function search(){
-	var evaluation=getSelectBoxValue("evaluation");
-	var lower=getSelectBoxValue("lowerCost");
-	var upper=getSelectBoxValue("upperCost");
-	var toSumi=getSelectBoxValue("toSumi");
-	var toHigo=getSelectBoxValue("toHigo");
-	var prefecture=getSelectBoxValue("prefecture");
-	var city=getSelectBoxValue("city");
-	var isPair=document.getElementById("pair").checked;
-	var isBath=document.getElementById("bath").checked;
-	var isBalcony=document.getElementById("balcony").checked;
-	var isStove=document.getElementById("stove").checked;
-	var isBicycles=document.getElementById("bicycles").checked;
-	var sortValue=getSelectBoxValue("sortType").split(",");
-	var sortname="";
-	var sorttype="";
-	if(sortValue!=""){
-		sortname=sortName[sortValue[0]];
-		sorttype=typeName[sortValue[1]];
-	}
-	var data={
-		evaluation:evaluation,
-		upper:upper,
-		lower:lower,
-		prefecture:prefecture,
-		city:city,
-		sumi:toSumi,
-		higo:toHigo,
-		pair:isPair,
-		bath:isBath,
-		balcony:isBalcony,
-		stove:isStove,
-		bicycles:isBicycles,
-		sortName:sortname,
-		sortType:sorttype
-	};
+	var d=new Data();
+	d.loadData();
+
 	xhrSend("cgi/data.php",function(){
 		if(this.readyState===4 && this.status===200){
 			var text=this.responseText.split("\n");
 			setResponse(text);
 		}
-	},data);
-}
-
-function getSelectBoxValue(id){
-	var box=document.getElementById(id);
-	return box.options[box.selectedIndex].value;
+	},d.getData());
 }
 
 // HTMLフォームの形式にデータを変換する
