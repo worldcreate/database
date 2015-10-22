@@ -3,6 +3,7 @@
 
 	$request="SELECT * FROM rentView";
 	$condition="";
+	$sort="";
 	if(count($_POST)>0){
 		if($_POST['evaluation']!=""){
 			if($condition!="")
@@ -69,9 +70,15 @@
 				$condition.=" and ";
 			$condition.=" bicycles=1";
 		}
+		if($_POST["sortName"]!=""){
+			$sort.=" ".$_POST["sortName"]." ".$_POST["sortType"];
+		}
 	}
 	if($condition!=""){
-		$request=$request." where".$condition;
+		$request=$request." WHERE".$condition;
+	}
+	if($sort!=""){
+		$request.=" ORDER BY".$sort;
 	}
 	$db=new DB();
 	$response=$db->search($request);
