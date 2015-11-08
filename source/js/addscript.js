@@ -34,19 +34,17 @@ var selectId=["prefecture","city","ward"];
 function addLoad(){
 	var func=function(j){
 			return function(){
-				if(this.readyState===4 && this.status===200){
-					var box=document.getElementById(selectId[j]);
-					var text=this.responseText.split('\n');
-					box.innerHTML="<option value=''>----</option>";
-					text.forEach(function(e,i,a){
-						if(e==="")
-							return;
-						var column=e.split(',');
-						var id=column[0];
-						var value=column[1];
-						box.innerHTML+="<option value='"+id+"'>"+value+"</option>";
-					});
-				}
+				var box=document.getElementById(selectId[j]);
+				var text=this.responseText.split('\n');
+				box.innerHTML="<option value=''>----</option>";
+				text.forEach(function(e,i,a){
+					if(e==="")
+						return;
+					var column=e.split(',');
+					var id=column[0];
+					var value=column[1];
+					box.innerHTML+="<option value='"+id+"'>"+value+"</option>";
+				});
 			};
 		};
 	for(var i=0;i<selectId.length;i++){
@@ -107,10 +105,8 @@ function getStyle(element){
 function addfromForm(){
 	var production=function(data){
 		xhrSend('cgi/insert.php',function(){
-			if(this.readyState===4 && this.status===200){
-				alert(this.responseText);
-				addLoad();
-			}
+			alert(this.responseText);
+			addLoad();
 		},data);
 	};
 
@@ -140,25 +136,20 @@ function addfromForm(){
 							}
 							xhrSend('cgi/insert.php',function(t,D){
 								return function(){
-									if(this.readyState===4 && this.status===200){
-										var search={"table":t.key};
-										search[t.key]=t.value;
-										xhrSend('cgi/list.php',function(t,D){
-											return function(){
-												if(this.readyState===4 && this.status===200){
-													var key=t.key;
-													key+="_id";
-													var param=this.responseText.split(",");
-													D.data[key]=param[0]+","+t.type;
-													if(D.count==Object.keys(D.data).length-1){
-														console.log("search function");
-														production(Data.data);
-													}
-
-												}
-											};
-										}(t,D),search);
-									}
+									var search={"table":t.key};
+									search[t.key]=t.value;
+									xhrSend('cgi/list.php',function(t,D){
+										return function(){
+											var key=t.key;
+											key+="_id";
+											var param=this.responseText.split(",");
+											D.data[key]=param[0]+","+t.type;
+											if(D.count==Object.keys(D.data).length-1){
+												console.log("search function");
+												production(Data.data);
+											}
+										};
+									}(t,D),search);
 								};
 							}(tObj,Data),insert);
 							Data.count++;
@@ -188,6 +179,23 @@ function addfromForm(){
 		console.log("function");
 		production(Data.data);
 	}
+}
+
+function addfromUrl(){
+	var urltext=document.getElementById("url").value;
+	data={
+		url:urltext,
+		purpose:"GET"
+	};
+	if(urltext===""){
+		alert("urlを入力してください");
+		return;
+	}
+	xhrSend("cgi/originOpen.php",function(){
+		if(this.responseText=="")
+			return;
+		var homesparser=new HomesParser(urltext,this.responseText);
+	},data);
 }
 
 function getValue(ele){

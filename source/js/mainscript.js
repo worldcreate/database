@@ -145,36 +145,32 @@ function load(){
 
 	var data={table:"prefecture"};
 	xhrSend("cgi/list.php",function(){
-		if(this.readyState===4 && this.status===200){
-			var text=this.responseText.split("\n");
-			var p=document.getElementById("prefecture");
-			p.innerHTML+="<option value=''>----</option>";
-			text.forEach(function(e,i,a){
-				if(e==="")
-					return;
-				var column=e.split(",");
-				var id=column[0];
-				var value=column[1];
-				p.innerHTML+="<option value='"+id+"'>"+value+"</option>";
-			});
-		}
+		var text=this.responseText.split("\n");
+		var p=document.getElementById("prefecture");
+		p.innerHTML+="<option value=''>----</option>";
+		text.forEach(function(e,i,a){
+			if(e==="")
+				return;
+			var column=e.split(",");
+			var id=column[0];
+			var value=column[1];
+			p.innerHTML+="<option value='"+id+"'>"+value+"</option>";
+		});
 	},data);
 
 	data.table="city";
 	xhrSend("cgi/list.php",function(){
-		if(this.readyState===4 && this.status===200){
-			var text=this.responseText.split("\n");
-			var p=document.getElementById("city");
-			p.innerHTML+="<option value=''>----</option>";
-			text.forEach(function(e,i,a){
-				if(e==="")
-					return;
-				var column=e.split(",");
-				var id=column[0];
-				var value=column[1];
-				p.innerHTML+="<option value='"+id+"'>"+value+"</option>";
-			});
-		}
+		var text=this.responseText.split("\n");
+		var p=document.getElementById("city");
+		p.innerHTML+="<option value=''>----</option>";
+		text.forEach(function(e,i,a){
+			if(e==="")
+				return;
+			var column=e.split(",");
+			var id=column[0];
+			var value=column[1];
+			p.innerHTML+="<option value='"+id+"'>"+value+"</option>";
+		});
 	},data);
 
 	var upperSelect=document.getElementById("upperCost");
@@ -210,10 +206,8 @@ function call(){
 	d.loadSort();
 
 	xhrSend("cgi/data.php",function(){
-		if(this.readyState===4 && this.status===200){
-			var text=this.responseText.split("\n");
-			setResponse(text);
-		}
+		var text=this.responseText.split("\n");
+		setResponse(text);
 	},d.getData());
 }
 
@@ -222,10 +216,8 @@ function search(){
 	d.loadData();
 
 	xhrSend("cgi/data.php",function(){
-		if(this.readyState===4 && this.status===200){
-			var text=this.responseText.split("\n");
-			setResponse(text);
-		}
+		var text=this.responseText.split("\n");
+		setResponse(text);
 	},d.getData());
 }
 
@@ -248,14 +240,22 @@ function EncodeHTMLForm( data )
 function xhrOpen(url,func){
 	var xhr=new XMLHttpRequest();
 	xhr.open('GET',url,true);
-	xhr.onreadystatechange=func;
+	xhr.onreadystatechange=function(){
+		if(this.readyState===4 && this.status===200){
+			func.call(this);
+		}
+	};
 	xhr.send(null);
 }
 
 function xhrSend(url,func,data){
 	var xhr=new XMLHttpRequest();
 	xhr.open('POST',url,true);
-	xhr.onreadystatechange=func;
+	xhr.onreadystatechange=function(){
+		if(this.readyState===4 && this.status===200){
+			func.call(this);
+		}
+	};
 	xhr.setRequestHeader("content-type","application/x-www-form-urlencoded;charset=UTF-8");
 	xhr.send(EncodeHTMLForm(data));
 }
