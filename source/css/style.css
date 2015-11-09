@@ -74,3 +74,7 @@ body{
 #wardInput{
 	visibility:hidden;
 }
+
+.caution{
+	border:1px solid;
+}
