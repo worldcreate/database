@@ -210,3 +210,8 @@ function getValue(ele){
 		return getSelectBoxValue(ele.id);
 	}
 }
+
+function getSelectBoxValue(id){
+	var box=document.getElementById(id);
+	return box.options[box.selectedIndex].value;
+}
