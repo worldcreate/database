@@ -100,16 +100,16 @@ function getStyle(element){
 	return element.currentStyle || document.defaultView.getComputedStyle(element,'');
 }
 
+function production(data){
+	xhrSend('cgi/insert.php',function(){
+		alert(this.responseText);
+		addLoad();
+	},data);
+}
+
 // TODO
 // あとは本チャンのデータをinsertするだけ
 function addfromForm(){
-	var production=function(data){
-		xhrSend('cgi/insert.php',function(){
-			alert(this.responseText);
-			addLoad();
-		},data);
-	};
-
 	var Data=new function (){
 		this.data={"table":"rent"};
 		this.count=0;
