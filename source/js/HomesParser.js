@@ -80,64 +80,64 @@ var HomesParser=function(url,text){
 		this.balcony=setsubi.innerHTML.match(/バルコニー/)!=null|this.balcony;	// バルコニー
 		this.bicycle=setsubi.innerHTML.match(/駐輪場/)!=null|this.bicycle;	// 駐輪場
 	}
-}
+};
 
-HomesParser.prototype.getName(){
+HomesParser.prototype.getName=function(){
 	return this.name;
-}
+};
 
-HomesParser.prototype.getCost(){
+HomesParser.prototype.getCost=function(){
 	return this.cost;
-}
+};
 
-HomesParser.prototype.getReiCost(){
+HomesParser.prototype.getReiCost=function(){
 	return this.reiCost;
-}
+};
 
-HomesParser.prototype.getShikiCost(){
+HomesParser.prototype.getShikiCost=function(){
 	return this.shikiCost;
-}
+};
 
-HomesParser.prototype.getPrefecture(){
+HomesParser.prototype.getPrefecture=function(){
 	return this.prefecture;
-}
+};
 
-HomesParser.prototype.getCity(){
+HomesParser.prototype.getCity=function(){
 	return this.city;
-}
+};
 
-HomesParser.prototype.getWard(){
+HomesParser.prototype.getWard=function(){
 	return this.ward;
-}
+};
 
-HomesParser.prototype.getAddress(){
+HomesParser.prototype.getAddress=function(){
 	return this.address;
-}
+};
 
-HomesParser.prototype.getSumi(){
+HomesParser.prototype.getSumi=function(){
 	return this.toSumi;
-}
+};
 
-HomesParser.prototype.getHigo(){
+HomesParser.prototype.getHigo=function(){
 	return this.toHigo;
-}
+};
 
-HomesParser.prototype.getPair(){
+HomesParser.prototype.getPair=function(){
 	return this.pair;
-}
+};
 
-HomesParser.prototype.getBath(){
+HomesParser.prototype.getBath=function(){
 	return this.bath;
-}
+};
 
-HomesParser.prototype.getBalcony(){
+HomesParser.prototype.getBalcony=function(){
 	return this.balcony;
-}
+};
 
-HomesParser.prototype.getStove(){
+HomesParser.prototype.getStove=function(){
 	return this.stove;
-}
+};
 
-HomesParser.prototype.getBicycle(){
+HomesParser.prototype.getBicycle=function(){
 	return this.bicycle;
-}
+};
