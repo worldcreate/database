@@ -132,6 +132,19 @@ String.prototype.at || Object.defineProperty(String.prototype, "at", { value: St
 
 //--------------------------------------------------------
 
+// 継承を可能にするための関数
+function inherits(ctor,superCtor){
+	ctor.super_=superCtor;
+	ctor.prototype=Object.create(superCtor.prototype,{
+		constructor:{
+			value:ctor,
+			enumerable:false,
+			writable:true,
+			configurable:true
+		}
+	});
+}
+
 function load(){
 	var HigoSelect=document.getElementById("toHigo");
 	var SumiSelect=document.getElementById("toSumi");
