@@ -28,4 +28,10 @@ var HomesParser=function(url,text){
 		});
 
 	},data);
+
+	dom.getElementById("chk-bkf-setsubi1").innerHTML;	// 二人入居可
+	dom.getElementById("chk-bkf-setsubi2").innerHTML;	// バストイレ、二口コンロ
+	dom.getElementById("chk-bkf-setsubi3").innerHTML;	// バルコニー、駐輪場
+
 }
+
