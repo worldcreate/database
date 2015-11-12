@@ -3,10 +3,38 @@ var HomesParser=function(url,text){
 	var dom=domParser.parseFromString(text,"text/html");
 
 	console.log("url:"+url);
-	console.log(dom.getElementById("chk-bkh-name").innerHTML);
-	console.log(dom.getElementById("chk-bkh-room").innerHTML);
-	console.log(dom.getElementById("chk-bkc-moneyroom").innerHTML);
-	console.log(dom.getElementById("chk-bkc-moneyshikirei").innerHTML);
+	this.name=dom.getElementById("chk-bkh-name").innerHTML+dom.getElementById("chk-bkh-room").innerHTML;	// name
+	console.log("name:"+this.name);
+
+	this.cost=dom.getElementById("chk-bkc-moneyroom").childNodes[0].childNodes[0].innerHTML;	// cost
+	console.log("cost:"+this.cost);
+
+	var shikirei=dom.getElementById("chk-bkc-moneyshikirei").innerHTML.split("/");
+	var shiki=shikirei[0];
+
+	var shikiNum=shiki.match(/[0-9]*/);
+	if(shiki.match(/ヶ月/)!=null){
+		this.shikiCost=shikiNum*this.cost;
+	}else if(shiki.match(/万円/)!=null){
+		this.shikiCost=shikiNum;
+	}
+	console.log("敷金:"+this.shikiCost);	// 敷金
+
+	var rei=shikirei[1];
+
+	var reiNum=rei.match(/[0-9]*/);
+	if(rei.match(/ヶ月/)!=null){
+		this.reiCost=reiNum*this.cost;
+	}else if(rei.match(/万円/)!=null){
+		this.reiCost=reiNum;
+	}
+	console.log("礼金:"+this.reiCost);	// 礼金
+
+	var fulladdress=dom.getElementById("chk-bkc-fulladdress").innerHTML.match(/[^ ]*府[^ ]*市.*/)[0];
+	this.prefecture=fulladdress.match(/.*府/)[0]||fulladdress.match(/.*県/)[0];
+	fulladdress=fulladdress.slice(-(fulladdress.length-this.prefecture.length));
+	this.city=fulladdress.match(/.*市/)[0];
+	
 	console.log(dom.getElementById("chk-bkc-fulladdress").innerHTML);
 
 	var urlsplit=url.split('/');
