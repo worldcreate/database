@@ -5,6 +5,7 @@
 <title>database</title>
 <link rel="stylesheet" type="text/css" href="css/min.css">
 <script type="text/javascript" src="js/script-min.js"></script>
+
 </head>
 <body onload="addLoad()">
 	<a href="./index.html">検索</a><br>
@@ -28,8 +29,15 @@
 	デメリット:<input type="text" id="demerit"><br>
 	その他:<input type="text" id="other"><br>
 	*URL:<input type="text" id="url"><br>
-	*マークがついているのは必須項目<br>
-	県や市、区の候補にないものは+を押すと入力ボックスが出るのでそこで入力する<br>
+	<div class="caution">
+		<ul>
+			<li>*マークがついているのは必須項目(但しURLによる追加の場合は無視でおｋ)</li>
+			<li>県や市、区の候補にないものは+を押すと入力ボックスが出るのでそこで入力する</li>
+			<li>URLによる追加の場合は評価値、メリット、デメリット、その他を入力できる(任意)</li>
+			<li>URLによる追加はまだ開発中(今はHOMESを対応させる予定)</li>
+		</ul>
+	</div>
 	<input type="button" onClick="addfromForm();" value="追加"></input>
+	<input type="button" onClick="addfromUrl();" value="URLによる追加"></input>
 </body>
 </html>

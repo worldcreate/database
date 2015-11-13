@@ -53,7 +53,7 @@ var Data=function(){
 Data.prototype.getSelectBoxValue=function(id){
 	var box=document.getElementById(id);
 	return box.options[box.selectedIndex].value;
-}
+};
 
 Data.prototype.loadData=function(){
 	this.evaluation=this.getSelectBoxValue("evaluation");
@@ -69,7 +69,7 @@ Data.prototype.loadData=function(){
 	this.isStove=document.getElementById("stove").checked;
 	this.isBicycles=document.getElementById("bicycles").checked;
 	this.sortValue=this.getSelectBoxValue("sortType").split(",");
-	if(this.sortValue!=""){
+	if(this.sortValue!==""){
 		this.sortname=this.sortName[this.sortValue[0]];
 		this.sorttype=this.typeName[this.sortValue[1]];
 	}
@@ -93,7 +93,7 @@ Data.prototype.loadData=function(){
 
 Data.prototype.loadSort=function(){
 	this.sortValue=this.getSelectBoxValue("sortType").split(",");
-	if(this.sortValue!=""){
+	if(this.sortValue!==""){
 		this.sortname=this.sortName[this.sortValue[0]];
 		this.sorttype=this.typeName[this.sortValue[1]];
 	}
@@ -101,11 +101,11 @@ Data.prototype.loadSort=function(){
 		sortName:this.sortname,
 		sortType:this.sorttype
 	};
-}
+};
 
 Data.prototype.getData=function(){
 	return this.data;
-}
+};
 
 //--------------------------------------------------------
 
@@ -132,6 +132,19 @@ String.prototype.at || Object.defineProperty(String.prototype, "at", { value: St
 
 //--------------------------------------------------------
 
+// 継承を可能にするための関数
+function inherits(ctor,superCtor){
+	ctor.super_=superCtor;
+	ctor.prototype=Object.create(superCtor.prototype,{
+		constructor:{
+			value:ctor,
+			enumerable:false,
+			writable:true,
+			configurable:true
+		}
+	});
+}
+
 function load(){
 	var HigoSelect=document.getElementById("toHigo");
 	var SumiSelect=document.getElementById("toSumi");
@@ -145,36 +158,32 @@ function load(){
 
 	var data={table:"prefecture"};
 	xhrSend("cgi/list.php",function(){
-		if(this.readyState===4 && this.status===200){
-			var text=this.responseText.split("\n");
-			var p=document.getElementById("prefecture");
-			p.innerHTML+="<option value=''>----</option>";
-			text.forEach(function(e,i,a){
-				if(e==="")
-					return;
-				var column=e.split(",");
-				var id=column[0];
-				var value=column[1];
-				p.innerHTML+="<option value='"+id+"'>"+value+"</option>";
-			});
-		}
+		var text=this.responseText.split("\n");
+		var p=document.getElementById("prefecture");
+		p.innerHTML+="<option value=''>----</option>";
+		text.forEach(function(e,i,a){
+			if(e==="")
+				return;
+			var column=e.split(",");
+			var id=column[0];
+			var value=column[1];
+			p.innerHTML+="<option value='"+id+"'>"+value+"</option>";
+		});
 	},data);
 
 	data.table="city";
 	xhrSend("cgi/list.php",function(){
-		if(this.readyState===4 && this.status===200){
-			var text=this.responseText.split("\n");
-			var p=document.getElementById("city");
-			p.innerHTML+="<option value=''>----</option>";
-			text.forEach(function(e,i,a){
-				if(e==="")
-					return;
-				var column=e.split(",");
-				var id=column[0];
-				var value=column[1];
-				p.innerHTML+="<option value='"+id+"'>"+value+"</option>";
-			});
-		}
+		var text=this.responseText.split("\n");
+		var p=document.getElementById("city");
+		p.innerHTML+="<option value=''>----</option>";
+		text.forEach(function(e,i,a){
+			if(e==="")
+				return;
+			var column=e.split(",");
+			var id=column[0];
+			var value=column[1];
+			p.innerHTML+="<option value='"+id+"'>"+value+"</option>";
+		});
 	},data);
 
 	var upperSelect=document.getElementById("upperCost");
@@ -210,10 +219,8 @@ function call(){
 	d.loadSort();
 
 	xhrSend("cgi/data.php",function(){
-		if(this.readyState===4 && this.status===200){
-			var text=this.responseText.split("\n");
-			setResponse(text);
-		}
+		var text=this.responseText.split("\n");
+		setResponse(text);
 	},d.getData());
 }
 
@@ -222,10 +229,8 @@ function search(){
 	d.loadData();
 
 	xhrSend("cgi/data.php",function(){
-		if(this.readyState===4 && this.status===200){
-			var text=this.responseText.split("\n");
-			setResponse(text);
-		}
+		var text=this.responseText.split("\n");
+		setResponse(text);
 	},d.getData());
 }
 
@@ -245,19 +250,35 @@ function EncodeHTMLForm( data )
 	return params.join( '&' ).replace( /%20/g, '+' );
 }
 
-function xhrOpen(url,func){
+function xhrOpen(url,func,async){
+	if(async===null)
+		async=true;
 	var xhr=new XMLHttpRequest();
-	xhr.open('GET',url,true);
-	xhr.onreadystatechange=func;
+	xhr.open('GET',url,async);
+	xhr.onreadystatechange=function(){
+		if(this.readyState===4 && this.status===200){
+			if(func!==null)
+				func.call(this);
+		}
+	};
 	xhr.send(null);
+	return xhr;
 }
 
-function xhrSend(url,func,data){
+function xhrSend(url,func,data,async){
+	if(async===null)
+		async=true;
 	var xhr=new XMLHttpRequest();
-	xhr.open('POST',url,true);
-	xhr.onreadystatechange=func;
+	xhr.open('POST',url,async);
+	xhr.onreadystatechange=function(){
+		if(this.readyState===4 && this.status===200){
+			if(func!==null)
+				func.call(this);
+		}
+	};
 	xhr.setRequestHeader("content-type","application/x-www-form-urlencoded;charset=UTF-8");
 	xhr.send(EncodeHTMLForm(data));
+	return xhr;
 }
 
 function setResponse(text){
