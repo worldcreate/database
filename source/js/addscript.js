@@ -1,36 +1,3 @@
-var stringId=[
-	"name","evaluation","cost","deposit",
-	"reward","prefecture",
-	"city","ward","address",
-	"toSumi","toHigo","pair",
-	"bath_wc","balcony","two_stove",
-	"bicycles","merit","demerit",
-	"other","url"
-];
-
-var ableNull=[
-	false,true,false,false,
-	false,false,
-	false,true,false,
-	false,false,true,
-	true,true,true,
-	true,true,true,
-	true,false
-];
-
-var paramType=[
-	"String","Int","String","String",
-	"String","String",
-	"String","String","String",
-	"Int","Int","Int",
-	"Int","Int","Int",
-	"Int","String","String",
-	"String","String"
-];
-
-var selectId=["prefecture","city","ward"];
-
-
 function addLoad(){
 	var func=function(j){
 			return function(){
