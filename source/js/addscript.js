@@ -90,7 +90,7 @@ function addfromForm(){
 		var value=getValue(ele);
 		if(value===""){
 			var flag=false;
-			if(AddedData.s_selectId[i]==""){
+			if(AddedData.s_selectId[i]!=""){
 				if(document.getElementById(AddedData.s_stringId[i]+"Input").value!=""){
 					flag=true;
 					var insert=new Ojbect();
