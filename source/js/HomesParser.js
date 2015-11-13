@@ -10,11 +10,11 @@ var HomesParser=function(url,text){
 	var shiki=shikirei[0];
 
 	var shikiNum=shiki.match(/[0-9]+/);
-	if(shikiNum!=null){
+	if(shikiNum!==null){
 		shikiNum=shikiNum[0];
-		if(shiki.match(/ヶ月/)!=null){
+		if(shiki.match(/ヶ月/)!==null){
 			this.shikiCost=shikiNum*this.cost;
-		}else if(shiki.match(/万円/)!=null){
+		}else if(shiki.match(/万円/)!==null){
 			this.shikiCost=shikiNum;
 		}
 	}else{
@@ -24,11 +24,11 @@ var HomesParser=function(url,text){
 	var rei=shikirei[1];
 
 	var reiNum=rei.match(/[0-9]+/);
-	if(reiNum!=null){
+	if(reiNum!==null){
 		reiNum=reiNum[0];
-		if(rei.match(/ヶ月/)!=null){
+		if(rei.match(/ヶ月/)!==null){
 			this.reiCost=reiNum*this.cost;
-		}else if(rei.match(/万円/)!=null){
+		}else if(rei.match(/万円/)!==null){
 			this.reiCost=reiNum;
 		}
 	}else{
@@ -41,7 +41,7 @@ var HomesParser=function(url,text){
 	this.city=fulladdress.match(/.*市/)[0];
 	fulladdress=fulladdress.slice(-(fulladdress.length-this.city.length));
 	this.ward=fulladdress.match(/.*区/);
-	if(this.ward!=null){
+	if(this.ward!==null){
 		this.ward=this.ward[0];
 		fulladdress=fulladdress.slice(-(fulladdress.length-this.ward.length));
 	}else{
@@ -62,7 +62,7 @@ var HomesParser=function(url,text){
 			var domTrans=domTransParser.parseFromString(this.responseText,"text/html");
 			t.toHigo=domTrans.getElementsByClassName("time")[0].innerHTML.match(/[0-9]+/)[0];
 			t.toSumi=domTrans.getElementsByClassName("time")[1].innerHTML.match(/[0-9]+/)[0];
-		}
+		};
 	}(this),data);
 
 	this.pair=false;
@@ -72,13 +72,13 @@ var HomesParser=function(url,text){
 	this.bicycle=false;
 	for(var i=1;i<6;i++){
 		var setsubi=dom.getElementById("chk-bkf-setsubi"+i);
-		if(setsubi==null)
+		if(setsubi===null)
 			continue;
-		this.pair=setsubi.innerHTML.match(/二人入居可/)!=null|this.pair;	// 二人入居可
-		this.bath=setsubi.innerHTML.match(/バス・トイレ別/)!=null|this.bath;	// バストイレ
-		this.stove=setsubi.innerHTML.match(/コンロ二口/)!=null|this.stove;	// 二口コンロ
-		this.balcony=setsubi.innerHTML.match(/バルコニー/)!=null|this.balcony;	// バルコニー
-		this.bicycle=setsubi.innerHTML.match(/駐輪場/)!=null|this.bicycle;	// 駐輪場
+		this.pair=setsubi.innerHTML.match(/二人入居可/)!==null|this.pair;	// 二人入居可
+		this.bath=setsubi.innerHTML.match(/バス・トイレ別/)!==null|this.bath;	// バストイレ
+		this.stove=setsubi.innerHTML.match(/コンロ二口/)!==null|this.stove;	// 二口コンロ
+		this.balcony=setsubi.innerHTML.match(/バルコニー/)!==null|this.balcony;	// バルコニー
+		this.bicycle=setsubi.innerHTML.match(/駐輪場/)!==null|this.bicycle;	// 駐輪場
 	}
 };
 

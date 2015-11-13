@@ -2,9 +2,9 @@ var AddedData=function(Parser){
 	this.data={"table":"rent"};
 	this.count=0;
 
-	if(Parser==null)
+	if(Parser===null)
 		return;
-}
+};
 
 AddedData.s_stringId=[
 	"name","evaluation","cost","deposit",
@@ -54,16 +54,16 @@ AddedData.prototype.addData=function(key,value){
 	}
 	this.data[key]=value+","+AddedData.s_paramType[index];
 	this.count++;
-}
+};
 
 AddedData.prototype.setName=function(name){
-	this.data['name']=name;
-}
+	this.data.name=name;
+};
 
 AddedData.prototype.length=function(){
 	return this.count;
-}
+};
 
 AddedData.prototype.getData=function(){
 	return this.data;
-}
+};

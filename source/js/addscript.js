@@ -17,7 +17,7 @@ function addLoad(){
 	console.log(AddedData.s_selectId[0]);
 	for(var i=0;i<AddedData.s_selectId.length;i++){
 		console.log(AddedData.s_selectId[i]);
-		if(AddedData.s_selectId[i]=="")
+		if(AddedData.s_selectId[i]==="")
 			continue;
 		var data={table:AddedData.s_selectId[i]};
 		xhrSend("cgi/list.php",func(i),data);
@@ -90,16 +90,16 @@ function addfromForm(){
 		var value=getValue(ele);
 		if(value===""){
 			var flag=false;
-			if(AddedData.s_selectId[i]!=""){
-				if(document.getElementById(AddedData.s_stringId[i]+"Input").value!=""){
+			if(AddedData.s_selectId[i]!==""){
+				if(document.getElementById(AddedData.s_stringId[i]+"Input").value!==""){
 					flag=true;
-					var insert=new Object();
-					insert["table"]=AddedData.s_stringId[i];
+					var insert={};
+					insert.table=AddedData.s_stringId[i];
 					insert[AddedData.s_stringId[i]]=document.getElementById(AddedData.s_stringId[i]+"Input").value+",String";
 					xhrSend('cgi/insert.php',null,insert,false);
 
-					var search=new Object();
-					search["table"]=AddedData.s_stringId[i];
+					var search={};
+					search.table=AddedData.s_stringId[i];
 					search[AddedData.s_stringId[i]]=document.getElementById(AddedData.s_stringId[i]+"Input").value;
 					var ret=xhrSend('cgi/list.php',null,search,false);
 
@@ -113,15 +113,15 @@ function addfromForm(){
 			}
 		}else{
 			var key=AddedData.s_stringId[i];
-			if(AddedData.s_selectId[i]!=""){
+			if(AddedData.s_selectId[i]!==""){
 				key+="_id";
 			}
 			data.addData(key,value);
 		}
 	}
 	var d=data.getData();
-	for(key in d){
-		console.log(key+":"+d[key]);
+	for(k in d){
+		console.log(k+":"+d[k]);
 	}
 	production(data.getData());
 }
@@ -137,7 +137,7 @@ function addfromUrl(){
 		return;
 	}
 	xhrSend("cgi/originOpen.php",function(){
-		if(this.responseText=="")
+		if(this.responseText==="")
 			return;
 		var homesparser=new HomesParser(urltext,this.responseText);
 	},data);

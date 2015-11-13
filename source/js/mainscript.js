@@ -53,7 +53,7 @@ var Data=function(){
 Data.prototype.getSelectBoxValue=function(id){
 	var box=document.getElementById(id);
 	return box.options[box.selectedIndex].value;
-}
+};
 
 Data.prototype.loadData=function(){
 	this.evaluation=this.getSelectBoxValue("evaluation");
@@ -69,7 +69,7 @@ Data.prototype.loadData=function(){
 	this.isStove=document.getElementById("stove").checked;
 	this.isBicycles=document.getElementById("bicycles").checked;
 	this.sortValue=this.getSelectBoxValue("sortType").split(",");
-	if(this.sortValue!=""){
+	if(this.sortValue!==""){
 		this.sortname=this.sortName[this.sortValue[0]];
 		this.sorttype=this.typeName[this.sortValue[1]];
 	}
@@ -93,7 +93,7 @@ Data.prototype.loadData=function(){
 
 Data.prototype.loadSort=function(){
 	this.sortValue=this.getSelectBoxValue("sortType").split(",");
-	if(this.sortValue!=""){
+	if(this.sortValue!==""){
 		this.sortname=this.sortName[this.sortValue[0]];
 		this.sorttype=this.typeName[this.sortValue[1]];
 	}
@@ -101,11 +101,11 @@ Data.prototype.loadSort=function(){
 		sortName:this.sortname,
 		sortType:this.sorttype
 	};
-}
+};
 
 Data.prototype.getData=function(){
 	return this.data;
-}
+};
 
 //--------------------------------------------------------
 
@@ -251,13 +251,13 @@ function EncodeHTMLForm( data )
 }
 
 function xhrOpen(url,func,async){
-	if(async==null)
+	if(async===null)
 		async=true;
 	var xhr=new XMLHttpRequest();
 	xhr.open('GET',url,async);
 	xhr.onreadystatechange=function(){
 		if(this.readyState===4 && this.status===200){
-			if(func!=null)
+			if(func!==null)
 				func.call(this);
 		}
 	};
@@ -266,13 +266,13 @@ function xhrOpen(url,func,async){
 }
 
 function xhrSend(url,func,data,async){
-	if(async==null)
+	if(async===null)
 		async=true;
 	var xhr=new XMLHttpRequest();
 	xhr.open('POST',url,async);
 	xhr.onreadystatechange=function(){
 		if(this.readyState===4 && this.status===200){
-			if(func!=null)
+			if(func!==null)
 				func.call(this);
 		}
 	};
