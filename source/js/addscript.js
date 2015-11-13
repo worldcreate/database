@@ -17,6 +17,8 @@ function addLoad(){
 	console.log(AddedData.s_selectId[0]);
 	for(var i=0;i<AddedData.s_selectId.length;i++){
 		console.log(AddedData.s_selectId[i]);
+		if(AddedData.s_selectId[i]=="")
+			continue;
 		var data={table:AddedData.s_selectId[i]};
 		xhrSend("cgi/list.php",func(i),data);
 	}
