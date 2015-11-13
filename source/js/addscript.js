@@ -1,20 +1,22 @@
 function addLoad(){
 	var func=function(j){
-			return function(){
-				var box=document.getElementById(AddedData.s_selectId[j]);
-				var text=this.responseText.split('\n');
-				box.innerHTML="<option value=''>----</option>";
-				text.forEach(function(e,i,a){
-					if(e==="")
-						return;
-					var column=e.split(',');
-					var id=column[0];
-					var value=column[1];
-					box.innerHTML+="<option value='"+id+"'>"+value+"</option>";
-				});
-			};
+		return function(){
+			var box=document.getElementById(AddedData.s_selectId[j]);
+			var text=this.responseText.split('\n');
+			box.innerHTML="<option value=''>----</option>";
+			text.forEach(function(e,i,a){
+				if(e==="")
+					return;
+				var column=e.split(',');
+				var id=column[0];
+				var value=column[1];
+				box.innerHTML+="<option value='"+id+"'>"+value+"</option>";
+			});
 		};
+	};
+	console.log(AddedData.s_selectId[0]);
 	for(var i=0;i<AddedData.s_selectId.length;i++){
+		console.log(AddedData.s_selectId[i]);
 		var data={table:AddedData.s_selectId[i]};
 		xhrSend("cgi/list.php",func(i),data);
 	}
