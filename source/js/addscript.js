@@ -1,7 +1,7 @@
 function addLoad(){
 	var func=function(j){
 			return function(){
-				var box=document.getElementById(selectId[j]);
+				var box=document.getElementById(AddedData.s_selectId[j]);
 				var text=this.responseText.split('\n');
 				box.innerHTML="<option value=''>----</option>";
 				text.forEach(function(e,i,a){
@@ -14,8 +14,8 @@ function addLoad(){
 				});
 			};
 		};
-	for(var i=0;i<selectId.length;i++){
-		var data={table:selectId[i]};
+	for(var i=0;i<AddedData.s_selectId.length;i++){
+		var data={table:AddedData.s_selectId[i]};
 		xhrSend("cgi/list.php",func(i),data);
 	}
 	var box=document.getElementById("evaluation");
@@ -77,75 +77,43 @@ function production(data){
 // TODO
 // あとは本チャンのデータをinsertするだけ
 function addfromForm(){
-	var Data=new function (){
-		this.data={"table":"rent"};
-		this.count=0;
-	};
+	var data=new AddedData();
 
-	for(var i=0;i<stringId.length;i++){
-		var ele=document.getElementById(stringId[i]);
+	for(var i=0;i<AddedData.s_stringId.length;i++){
+		var ele=document.getElementById(AddedData.s_stringId[i]);
 		var value=getValue(ele);
 		if(value===""){
-			if(!ableNull[i]){
-				var flag=false;
-				for(var j=0;j<selectId.length;j++){
-					if(stringId[i]==selectId[j]){
-						if(document.getElementById(stringId[i]+"Input").value==""){
-							break;
-						}else{
-							flag=true;
-							var insert={"table":stringId[i]};
-							insert[stringId[i]]=document.getElementById(stringId[i]+"Input").value+",String";
-							var tObj=new function(){
-								this.key=stringId[i];
-								this.value=document.getElementById(stringId[i]+"Input").value;
-								this.type=paramType[i];
-							}
-							xhrSend('cgi/insert.php',function(t,D){
-								return function(){
-									var search={"table":t.key};
-									search[t.key]=t.value;
-									xhrSend('cgi/list.php',function(t,D){
-										return function(){
-											var key=t.key;
-											key+="_id";
-											var param=this.responseText.split(",");
-											D.data[key]=param[0]+","+t.type;
-											if(D.count==Object.keys(D.data).length-1){
-												console.log("search function");
-												production(Data.data);
-											}
-										};
-									}(t,D),search);
-								};
-							}(tObj,Data),insert);
-							Data.count++;
-							continue;
-						}
-					}
-				}
-				if(!flag){
-					alert("データを入力してください["+stringId[i]+"]");
-					return;
-				}
-			}
-			continue;
-		}
-		var key=stringId[i];
-		for(var j=0;j<selectId.length;j++){
-			if(stringId[i]==selectId[j]){
-				key+="_id";
-				break;
-			}
-		}
-		Data.data[key]=value+","+paramType[i];
-		Data.count++;
-	}
+			var flag=false;
+			if(AddedData.s_selectId[i]==""){
+				if(document.getElementById(AddedData.s_stringId[i]+"Input").value!=""){
+					flag=true;
+					var insert=new Ojbect();
+					insert["table"]=AddedData.s_stringId[i];
+					insert[AddedData.s_stringId[i]]=document.getElementById(AddedData.s_stringId[i]+"Input").value+",String";
+					xhrSend('cgi/insert.php',null,insert,false);
 
-	if(Data.count==Object.keys(Data.data).length-1){
-		console.log("function");
-		production(Data.data);
+					var search=new Object();
+					search["table"]=AddedData.s_stringId[i];
+					search[AddedData.s_stringId[i]]=document.getElementById(AddedData.s_stringId[i]+"Input").value;
+					var ret=xhrSend('cgi/list.php',null,search,false);
+
+					var param=ret.responseText.split(',');
+					data.addData(AddedData.s_stringId[i],param[0]);
+				}
+			}
+			if(!flag){
+				alert("データを入力してください["+AddedData.s_stringId[i]+"]");
+				return;
+			}
+		}else{
+			var key=AddedData.s_stringId[i];
+			if(AddedData.s_selectId[i]!=""){
+				key+="_id";
+			}
+			data.addData(key,value);
+		}
 	}
+	production(data.getData());
 }
 
 function addfromUrl(){
