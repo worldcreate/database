@@ -104,7 +104,7 @@ function addfromForm(){
 					var ret=xhrSend('cgi/list.php',null,search,false);
 
 					var param=ret.responseText.split(',');
-					data.addData(AddedData.s_stringId[i],param[0]);
+					data.addData(AddedData.s_stringId[i]+"_id",param[0]);
 				}
 			}
 			if(!flag && !AddedData.s_ableNull[i]){
