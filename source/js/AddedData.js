@@ -1,48 +1,48 @@
 var AddedData=function(Parser){
+	this.data={"table":"rent"};
+	this.count=0;
+
 	if(Parser==null)
 		return;
-	this.data={"table":"rent"};
-
-	this.stringId=[
-		"name","evaluation","cost","deposit",
-		"reward","prefecture",
-		"city","ward","address",
-		"toSumi","toHigo","pair",
-		"bath_wc","balcony","two_stove",
-		"bicycles","merit","demerit",
-		"other","url"
-	];
-
-	this.ableNull=[
-		false,true,false,false,
-		false,false,
-		false,true,false,
-		false,false,true,
-		true,true,true,
-		true,true,true,
-		true,false
-	];
-
-	this.paramType=[
-		"String","Int","String","String",
-		"String","String",
-		"String","String","String",
-		"Int","Int","Int",
-		"Int","Int","Int",
-		"Int","String","String",
-		"String","String"
-	];
-
-	this.selectId=["","","","",
-		"","prefecture","city","ward","",
-		"","","",
-		"","","",
-		"","","",
-		"",""
-	];
-
-	this.count=0;
 }
+
+AddedData.s_stringId=[
+	"name","evaluation","cost","deposit",
+	"reward","prefecture",
+	"city","ward","address",
+	"toSumi","toHigo","pair",
+	"bath_wc","balcony","two_stove",
+	"bicycles","merit","demerit",
+	"other","url"
+];
+
+AddedData.s_ableNull=[
+	false,true,false,false,
+	false,false,
+	false,true,false,
+	false,false,true,
+	true,true,true,
+	true,true,true,
+	true,false
+];
+
+AddedData.s_paramType=[
+	"String","Int","String","String",
+	"String","String",
+	"String","String","String",
+	"Int","Int","Int",
+	"Int","Int","Int",
+	"Int","String","String",
+	"String","String"
+];
+
+AddedData.s_selectId=["","","","",
+	"","prefecture","city","ward","",
+	"","","",
+	"","","",
+	"","","",
+	"",""
+];
 
 AddedData.prototype.addData=function(key,value){
 	var index=-1;
