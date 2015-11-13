@@ -112,12 +112,12 @@ function addfromForm(){
 				addLoad();
 			}
 		},data);
-	}
+	};
 
 	var Data=new function (){
 		this.data={"table":"rent"};
 		this.count=0;
-	}
+	};
 
 	for(var i=0;i<stringId.length;i++){
 		var ele=document.getElementById(stringId[i]);
@@ -152,9 +152,7 @@ function addfromForm(){
 													D.data[key]=param[0]+","+t.type;
 													if(D.count==Object.keys(D.data).length-1){
 														console.log("search function");
-														for(var key in Data.data){
-															console.log(key+","+Data.data[key]);
-														}
+														production(Data.data);
 													}
 
 												}
@@ -188,9 +186,7 @@ function addfromForm(){
 
 	if(Data.count==Object.keys(Data.data).length-1){
 		console.log("function");
-		for(var key in Data.data){
-			console.log(key+","+Data.data[key]);
-		}
+		production(Data.data);
 	}
 }
 
