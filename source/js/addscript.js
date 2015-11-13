@@ -119,10 +119,6 @@ function addfromForm(){
 			data.addData(key,value);
 		}
 	}
-	var d=data.getData();
-	for(k in d){
-		console.log(k+":"+d[k]);
-	}
 	production(data.getData());
 }
 
