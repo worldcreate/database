@@ -261,6 +261,7 @@ function xhrOpen(url,func,async){
 		}
 	};
 	xhr.send(null);
+	return xhr;
 }
 
 function xhrSend(url,func,data,async){
@@ -275,6 +276,7 @@ function xhrSend(url,func,data,async){
 	};
 	xhr.setRequestHeader("content-type","application/x-www-form-urlencoded;charset=UTF-8");
 	xhr.send(EncodeHTMLForm(data));
+	return xhr;
 }
 
 function setResponse(text){
