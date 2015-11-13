@@ -257,7 +257,8 @@ function xhrOpen(url,func,async){
 	xhr.open('GET',url,async);
 	xhr.onreadystatechange=function(){
 		if(this.readyState===4 && this.status===200){
-			func.call(this);
+			if(func!=null)
+				func.call(this);
 		}
 	};
 	xhr.send(null);
@@ -271,7 +272,8 @@ function xhrSend(url,func,data,async){
 	xhr.open('POST',url,async);
 	xhr.onreadystatechange=function(){
 		if(this.readyState===4 && this.status===200){
-			func.call(this);
+			if(func!=null)
+				func.call(this);
 		}
 	};
 	xhr.setRequestHeader("content-type","application/x-www-form-urlencoded;charset=UTF-8");
