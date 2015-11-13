@@ -107,7 +107,7 @@ function addfromForm(){
 					data.addData(AddedData.s_stringId[i],param[0]);
 				}
 			}
-			if(!flag){
+			if(!flag && !AddedData.s_ableNull[i]){
 				alert("データを入力してください["+AddedData.s_stringId[i]+"]");
 				return;
 			}
