@@ -46,13 +46,13 @@ AddedData.s_selectId=["","","","",
 
 AddedData.prototype.addData=function(key,value){
 	var index=-1;
-	for(var i=0;i<this.stringId.length;i++){
-		if(key===this.stringId[i]){
+	for(var i=0;i<AddedData.s_stringId.length;i++){
+		if(key===AddedData.s_stringId[i]){
 			index=i;
 			break;
 		}
 	}
-	this.data[key]=value+","+this.paramType[index];
+	this.data[key]=value+","+AddedData.s_paramType[index];
 	this.count++;
 }
 
