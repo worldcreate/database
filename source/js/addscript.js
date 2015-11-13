@@ -84,6 +84,8 @@ function addfromForm(){
 	var data=new AddedData();
 
 	for(var i=0;i<AddedData.s_stringId.length;i++){
+		console.log(AddedData.s_stringId[i]);
+		console.log(document.getElementById(AddedData.s_stringId[i]));
 		var ele=document.getElementById(AddedData.s_stringId[i]);
 		var value=getValue(ele);
 		if(value===""){
