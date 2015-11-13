@@ -33,7 +33,15 @@ var AddedData=function(Parser){
 		"String","String"
 	];
 
-	this.selectId=["prefecture","city","ward"];
+	this.selectId=["","","","",
+		"","prefecture","city","ward","",
+		"","","",
+		"","","",
+		"","","",
+		"",""
+	];
+
+	this.count=0;
 }
 
 AddedData.prototype.addData=function(key,value){
@@ -45,8 +53,17 @@ AddedData.prototype.addData=function(key,value){
 		}
 	}
 	this.data[key]=value+","+this.paramType[index];
+	this.count++;
 }
 
 AddedData.prototype.setName=function(name){
 	this.data['name']=name;
+}
+
+AddedData.prototype.length=function(){
+	return this.count;
+}
+
+AddedData.prototype.getData=function(){
+	return this.data;
 }
