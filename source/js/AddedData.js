@@ -47,7 +47,7 @@ AddedData.s_selectId=["","","","",
 AddedData.prototype.addData=function(key,value){
 	var index=-1;
 	for(var i=0;i<AddedData.s_stringId.length;i++){
-		if(key===AddedData.s_stringId[i]){
+		if(key.indexOf(AddedData.s_stringId[i])!=-1){
 			index=i;
 			break;
 		}
