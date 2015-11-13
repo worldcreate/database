@@ -12,7 +12,8 @@ module.exports=function(grunt){
 				src:[
 				'source/js/mainscript.js',
 				'source/js/addscript.js',
-				'source/js/HomesParser.js'
+				'source/js/HomesParser.js',
+				'source/js/AddedData.js'
 				],
 			dest:'source/js/~script.js'
 			}
