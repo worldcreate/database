@@ -250,9 +250,11 @@ function EncodeHTMLForm( data )
 	return params.join( '&' ).replace( /%20/g, '+' );
 }
 
-function xhrOpen(url,func){
+function xhrOpen(url,func,async){
+	if(async==null)
+		async=true;
 	var xhr=new XMLHttpRequest();
-	xhr.open('GET',url,true);
+	xhr.open('GET',url,async);
 	xhr.onreadystatechange=function(){
 		if(this.readyState===4 && this.status===200){
 			func.call(this);
@@ -261,9 +263,11 @@ function xhrOpen(url,func){
 	xhr.send(null);
 }
 
-function xhrSend(url,func,data){
+function xhrSend(url,func,data,async){
+	if(async==null)
+		async=true;
 	var xhr=new XMLHttpRequest();
-	xhr.open('POST',url,true);
+	xhr.open('POST',url,async);
 	xhr.onreadystatechange=function(){
 		if(this.readyState===4 && this.status===200){
 			func.call(this);
