@@ -2,9 +2,9 @@ var AddedData=function(Parser){
 	this.data={"table":"rent"};
 	this.count=0;
 
-	if(Parser==null)
+	if(Parser===null)
 		return;
-}
+};
 
 AddedData.s_stringId=[
 	"name","evaluation","cost","deposit",
@@ -46,24 +46,24 @@ AddedData.s_selectId=["","","","",
 
 AddedData.prototype.addData=function(key,value){
 	var index=-1;
-	for(var i=0;i<this.stringId.length;i++){
-		if(key===this.stringId[i]){
+	for(var i=0;i<AddedData.s_stringId.length;i++){
+		if(key.indexOf(AddedData.s_stringId[i])!=-1){
 			index=i;
 			break;
 		}
 	}
-	this.data[key]=value+","+this.paramType[index];
+	this.data[key]=value+","+AddedData.s_paramType[index];
 	this.count++;
-}
+};
 
 AddedData.prototype.setName=function(name){
-	this.data['name']=name;
-}
+	this.data.name=name;
+};
 
 AddedData.prototype.length=function(){
 	return this.count;
-}
+};
 
 AddedData.prototype.getData=function(){
 	return this.data;
-}
+};
