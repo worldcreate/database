@@ -56,14 +56,10 @@ var HomesParser=function(url,text){
 		url:"https://www.homes.co.jp/_ajax/detail/transit/chintai/"+unique+"/",
 		value:"cond[commute_eki][0]:肥後橋,cond[commute_eki][1]:住道"
 	};
-	xhrSend("cgi/originOpen.php",function(t){
-		return function(){
-			var domTransParser=new DOMParser();
-			var domTrans=domTransParser.parseFromString(this.responseText,"text/html");
-			t.toHigo=domTrans.getElementsByClassName("time")[0].innerHTML.match(/[0-9]+/)[0];
-			t.toSumi=domTrans.getElementsByClassName("time")[1].innerHTML.match(/[0-9]+/)[0];
-		};
-	}(this),data);
+	var ret=xhrSend("cgi/originOpen.php",null,data,false);
+	var domTrans=domParser.parseFromString(ret.responseText,"text/html");
+	t.toHigo=domTrans.getElementsByClassName("time")[0].innerHTML.match(/[0-9]+/)[0];
+	t.toSumi=domTrans.getElementsByClassName("time")[1].innerHTML.match(/[0-9]+/)[0];
 
 	this.pair=false;
 	this.bath=false;
