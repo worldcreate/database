@@ -93,7 +93,7 @@ function addfromForm(){
 			if(AddedData.s_selectId[i]!=""){
 				if(document.getElementById(AddedData.s_stringId[i]+"Input").value!=""){
 					flag=true;
-					var insert=new Ojbect();
+					var insert=new Object();
 					insert["table"]=AddedData.s_stringId[i];
 					insert[AddedData.s_stringId[i]]=document.getElementById(AddedData.s_stringId[i]+"Input").value+",String";
 					xhrSend('cgi/insert.php',null,insert,false);
