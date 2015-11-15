@@ -3,6 +3,29 @@ var AddedData=function(){
 	this.count=0;
 };
 
+AddedData.s_ID={
+	NAME:0,
+	EVAL:1,
+	COST:2,
+	REICOST:3,
+	SHIKICOST:4,
+	PREFECTURE:5,
+	CITY:6,
+	WARD:7,
+	ADDRESS:8,
+	TOSUMI:9,
+	TOHIGO:10,
+	PAIR:11,
+	BATH_WC:12,
+	BALCONY:13,
+	TWO_STOVE:14,
+	BICYCLES:15,
+	MERIT:16,
+	DEMERIT:17,
+	OTHER:18,
+	URL:19
+};
+
 AddedData.s_stringId=[
 	"name","evaluation","cost","deposit",
 	"reward","prefecture",
