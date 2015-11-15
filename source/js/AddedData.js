@@ -1,9 +1,6 @@
-var AddedData=function(Parser){
+var AddedData=function(){
 	this.data={"table":"rent"};
 	this.count=0;
-
-	if(Parser===null)
-		return;
 };
 
 AddedData.s_stringId=[
