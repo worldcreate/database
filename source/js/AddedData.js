@@ -56,10 +56,6 @@ AddedData.prototype.addData=function(key,value){
 	this.count++;
 };
 
-AddedData.prototype.setName=function(name){
-	this.data.name=name;
-};
-
 AddedData.prototype.length=function(){
 	return this.count;
 };
