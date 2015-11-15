@@ -78,6 +78,25 @@ var HomesParser=function(url,text){
 	}
 };
 
+HomesParser.prototype.setData=function(data){
+	data.addData(AddedData.s_stringId[AddedData.s_ID.NAME],this.getName());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.COST],this.getCost());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.REICOST],this.getReiCost());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.SHIKICOST],this.getShikiCost());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.PREFECTURE],this.getPrefecture());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.CITY],this.getCity());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.WARD],this.getWard());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.ADDRESS],this.getAddress());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.TOSUMI],this.getSumi());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.TOHIGO],this.getHigo());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.PAIR],this.getPair());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.BATH_WC],this.getBath());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.BALCONY],this.getBalcony());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.TWO_STOVE],this.getStove());
+	data.addData(AddedData.s_stringId[AddedData.s_ID.BICYCLES],this.getBicycle());
+};
+
+
 HomesParser.prototype.getName=function(){
 	return this.name;
 };
